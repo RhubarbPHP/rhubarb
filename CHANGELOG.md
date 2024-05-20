@@ -1,5 +1,9 @@
 # Change log
 
+### 1.7.8
+
+* Updated: Requests containing URL parameters are now sanitised to prevent XSS attacks
+
 ### 2.0.0
 
 * Upgraded: psr/container moved to version 2 to allow for PHP 8 package support (e.g. Slim/Pimple etc.)
