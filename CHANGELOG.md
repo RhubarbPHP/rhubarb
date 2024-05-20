@@ -1,5 +1,9 @@
 # Change log
 
+### 1.7.8
+
+* Updated: Requests containing URL parameters are now sanitised to prevent XSS attacks
+
 ### 1.7.7
 * Fixed: More deprecated required parameter follows optional parameter warnings
 

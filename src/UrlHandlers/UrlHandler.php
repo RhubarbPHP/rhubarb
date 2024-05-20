@@ -266,6 +266,17 @@ abstract class UrlHandler implements GeneratesResponseInterface
         return $request->server("REQUEST_SCHEME") . "://" . $request->server("SERVER_NAME") . $this->handledUrl;
     }
 
+    private function sanitizeRequest($request) {
+        foreach ($request as $key => $value) {
+            if (is_string($value)) {
+                $request->$key = filter_var($value, FILTER_SANITIZE_STRING);
+            } elseif (is_array($value)) {
+                $request->$key = filter_var_array($value, FILTER_SANITIZE_STRING);
+            }
+        }
+        return $request;
+    }
+
     /**
      * Return the response when appropriate or false if no response could be generated.
      *
@@ -277,6 +288,10 @@ abstract class UrlHandler implements GeneratesResponseInterface
      */
     public function generateResponse($request = null, $currentUrlFragment = false)
     {
+        if ($request !== null) {
+            $request = $this->sanitizeRequest($request);
+        }
+
         if ($currentUrlFragment === false) {
             $currentUrlFragment = $request->urlPath;
         }
