@@ -267,13 +267,7 @@ abstract class UrlHandler implements GeneratesResponseInterface
     }
 
     private function sanitizeRequest($request) {
-        foreach ($request as $key => $value) {
-            if (is_string($value)) {
-                $request->$key = filter_var($value, FILTER_SANITIZE_STRING);
-            } elseif (is_array($value)) {
-                $request->$key = filter_var_array($value, FILTER_SANITIZE_STRING);
-            }
-        }
+        $request->urlPath = htmlspecialchars($request->urlPath);
         return $request;
     }
 
