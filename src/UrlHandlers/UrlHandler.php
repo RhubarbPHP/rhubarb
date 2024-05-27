@@ -267,7 +267,7 @@ abstract class UrlHandler implements GeneratesResponseInterface
     }
 
     private function sanitizeRequest($request) {
-        $request->urlPath = htmlspecialchars($request->urlPath);
+        $request->uri = htmlspecialchars($request->uri);
         return $request;
     }
 
