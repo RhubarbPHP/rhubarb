@@ -63,8 +63,9 @@ class HttpResponse
      * @param string $domain Domain the cookie should be available to - defaults to current subdomain. Set to ".domain.com" to make available to all subdomains.
      * @param bool $secure Indicates that the cookie should only be transmitted via HTTPS - defaults to false
      * @param bool $httpOnly Indicates that the cookie should only be transmitted via the HTTP Protocol - defaults to false
+     * @param string $sameSite Indicates the SameSite attribute of the cookie. Can be "Strict", "Lax" or "None" - defaults to "None".
      */
-    public static function setCookie($name, $value, $expirySecondsFromNow = 1209600, $path = "/", $domain = null, $secure = false, $httpOnly = false)
+    public static function setCookie($name, $value, $expirySecondsFromNow = 1209600, $path = "/", $domain = null, $secure = false, $httpOnly = false, $sameSite = "None")
     {
         if ($expirySecondsFromNow != null){
             $expirySecondsFromNow = time() + $expirySecondsFromNow;
@@ -73,7 +74,14 @@ class HttpResponse
         }
 
         if (!Application::current()->unitTesting) {
-            setcookie($name, $value, $expirySecondsFromNow, $path, $domain, $secure, $httpOnly);
+            setcookie($name, $value, [
+                'expires' => $expirySecondsFromNow,
+                'path' => $path,
+                'domain' => $domain,
+                'secure' => $secure,
+                'httponly' => $httpOnly,
+                'samesite' => $sameSite
+            ]);
         }
 
         $request = Request::current();

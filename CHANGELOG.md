@@ -1,5 +1,10 @@
 # Change log
 
+### 1.7.9
+
+* Updated: setCookie() function in HttpResponse.php to allow for the SameSite attribute to be set with new php 
+           setcookie() options array method signature. 
+
 ### 1.7.8
 
 * Updated: Requests containing URL parameters are now sanitised to prevent XSS attacks
