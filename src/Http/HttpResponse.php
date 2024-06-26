@@ -63,9 +63,9 @@ class HttpResponse
      * @param string $domain Domain the cookie should be available to - defaults to current subdomain. Set to ".domain.com" to make available to all subdomains.
      * @param bool $secure Indicates that the cookie should only be transmitted via HTTPS - defaults to false
      * @param bool $httpOnly Indicates that the cookie should only be transmitted via the HTTP Protocol - defaults to false
-     * @param string $sameSite Indicates the SameSite attribute of the cookie. Can be "Strict", "Lax" or "None" - defaults to "None".
+     * @param string $sameSite Indicates the SameSite attribute of the cookie. Can be "Strict", "Lax" or "None" - defaults to "Lax".
      */
-    public static function setCookie($name, $value, $expirySecondsFromNow = 1209600, $path = "/", $domain = null, $secure = false, $httpOnly = false, $sameSite = "None")
+    public static function setCookie($name, $value, $expirySecondsFromNow = 1209600, $path = "/", $domain = null, $secure = false, $httpOnly = false, $sameSite = "Lax")
     {
         if ($expirySecondsFromNow != null){
             $expirySecondsFromNow = time() + $expirySecondsFromNow;
@@ -94,9 +94,9 @@ class HttpResponse
      * @param string $domain Domain the cookie should be available to - defaults to current subdomain. Set to ".domain.com" to make available to all subdomains.
      * @param bool $secure Indicates that the cookie should only be transmitted via HTTPS - defaults to false
      * @param bool $httpOnly Indicates that the cookie should only be transmitted via the HTTP Protocol - defaults to false
-     * @param string $sameSite Indicates the SameSite attribute of the cookie. Can be "Strict", "Lax" or "None" - defaults to "None".
+     * @param string $sameSite Indicates the SameSite attribute of the cookie. Can be "Strict", "Lax" or "None" - defaults to "Lax".
      */
-    public static function unsetCookie($name, $path = "/", $domain = null, $secure = false, $httpOnly = false, $sameSite = "None")
+    public static function unsetCookie($name, $path = "/", $domain = null, $secure = false, $httpOnly = false, $sameSite = "Lax")
     {
         self::setCookie($name, null, -1000, $path, $domain, $secure, $httpOnly, $sameSite);
     }
